@@ -48,10 +48,3 @@
         android:text="Clear Conversation History" />
 
 </LinearLayout>
-    <Button
-        android:id="@+id/btn_save_rules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Rules" />
-
-</LinearLayout>
