@@ -3,57 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:padding="16dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <Button
+        android:id="@+id/btn_download_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:text="Download Model" />
 
-    <ScrollView
+    <ProgressBar
+        android:id="@+id/model_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+    <TextView
+        android:id="@+id/tv_model_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Model status" />
 
-            <Button
-                android:id="@+id/btn_clear_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Clear Conversation History"
-                android:backgroundTint="@color/surface"
-                android:textColor="@color/text_primary"
-                android:layout_marginBottom="12dp"/>
+    <TextView
+        android:id="@+id/tv_model_status_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not downloaded" />
 
-            <Button
-                android:id="@+id/btn_redownload_model"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Re-download Model"
-                android:backgroundTint="@color/surface"
-                android:textColor="@color/text_secondary"/>
+    <EditText
+        android:id="@+id/et_system_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="System prompt" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"
-                android:layout_marginVertical="24dp"/>
-
-            <TextView
-                android:id="@+id/tv_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"/>
-
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/btn_save_rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Rules" />
 
 </LinearLayout>
