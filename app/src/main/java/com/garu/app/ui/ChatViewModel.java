@@ -35,9 +35,15 @@ public class ChatViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> isGenerating() { return generating; }
 
-    /** Initialize the LLM. Call once after model is confirmed present. */
-    public void initModel() {
+    /** Initialize the LLM asynchronously. Calls callback when done. */
+    public void initModel(Runnable onComplete) {
         executor.execute(() -> {
+            if (inference != null) {
+                // Already initialized
+                if (onComplete != null) onComplete.run();
+                return;
+            }
+
             String modelPath = ModelDownloader.getModelFile(getApplication()).getAbsolutePath();
             inference = new GaruInference();
             boolean ok = inference.loadModel(modelPath);
@@ -45,6 +51,8 @@ public class ChatViewModel extends AndroidViewModel {
                 // Surface error — model file may be corrupt
                 inference = null;
             }
+
+            if (onComplete != null) onComplete.run();
         });
     }
 
@@ -59,6 +67,7 @@ public class ChatViewModel extends AndroidViewModel {
             if (inference == null) {
                 Message err = new Message("Model not loaded. Please restart the app.", false);
                 dao.insert(err);
+                generating.postValue(false);
                 return;
             }
 

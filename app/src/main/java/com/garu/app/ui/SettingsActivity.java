@@ -12,13 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.garu.app.R;
 import com.garu.app.llm.ModelDownloader;
 import com.garu.app.model.AppDatabase;
 
 import java.io.File;
+import java.util.concurrent.Executors;
 
 /**
  * Settings screen allowing users to:
@@ -129,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .setMessage("Are you sure? This cannot be undone.")
                 .setPositiveButton("Clear", (dialog, which) -> {
                     // Clear from database
-                    java.util.concurrent.Executors.newSingleThreadExecutor().execute(() ->
+                    Executors.newSingleThreadExecutor().execute(() ->
                             AppDatabase.getInstance(this).messageDao().deleteAll());
                     Toast.makeText(SettingsActivity.this, "Chat history cleared.", Toast.LENGTH_SHORT).show();
                 })

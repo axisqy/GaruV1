@@ -18,7 +18,7 @@ import okhttp3.ResponseBody;
 /**
  * Downloads the Phi-3-mini-4k-instruct Q4 GGUF model from HuggingFace.
  * Model: microsoft/Phi-3-mini-4k-instruct-gguf  (~2.4 GB)
- * Direct CDN URL via HuggingFace resolve endpoint.
+ * Stores persistently in context.getExternalFilesDir(null)/models/
  */
 public class ModelDownloader {
 
@@ -29,7 +29,8 @@ public class ModelDownloader {
             "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/" +
             "Phi-3-mini-4k-instruct-q4.gguf";
 
-    public static final String MODEL_FILENAME = "Phi-3-mini-4k-instruct-q4.gguf";
+    public static final String MODEL_FILENAME = "model.gguf";
+    public static final String MODELS_FOLDER = "models";
 
     /** Callback interface for download progress */
     public interface DownloadCallback {
@@ -50,9 +51,24 @@ public class ModelDownloader {
                 .build();
     }
 
+    /** Returns the models directory, creating it if needed. */
+    public static File getModelsDir(Context context) {
+        File externalFilesDir = context.getExternalFilesDir(null);
+        if (externalFilesDir == null) {
+            throw new RuntimeException("External files directory is not available");
+        }
+        File modelsDir = new File(externalFilesDir, MODELS_FOLDER);
+        if (!modelsDir.exists()) {
+            if (!modelsDir.mkdirs()) {
+                Log.w(TAG, "Failed to create models directory: " + modelsDir.getAbsolutePath());
+            }
+        }
+        return modelsDir;
+    }
+
     /** Returns the local File where the model is (or will be) stored. */
     public static File getModelFile(Context context) {
-        return new File(context.getFilesDir(), MODEL_FILENAME);
+        return new File(getModelsDir(context), MODEL_FILENAME);
     }
 
     /** Returns true if the model file already exists and has non-zero size. */
@@ -63,6 +79,12 @@ public class ModelDownloader {
 
     /** Start downloading. Calls back on the calling thread's looper via Handler. */
     public void download(DownloadCallback callback) {
+        // Check if already downloaded
+        if (isModelDownloaded(context)) {
+            callback.onComplete(getModelFile(context));
+            return;
+        }
+
         Request request = new Request.Builder().url(MODEL_URL).build();
         activeCall = client.newCall(request);
 
@@ -82,12 +104,16 @@ public class ModelDownloader {
                 }
 
                 ResponseBody body = response.body();
-                if (body == null) { callback.onError("Empty response body"); return; }
+                if (body == null) { 
+                    callback.onError("Empty response body"); 
+                    return; 
+                }
 
                 long totalBytes = body.contentLength();
-                File outputFile = getModelFile(context);
+                File modelsDir = getModelsDir(context);
+                File outputFile = new File(modelsDir, MODEL_FILENAME);
                 // Write to temp file first, rename on success
-                File tempFile = new File(context.getFilesDir(), MODEL_FILENAME + ".tmp");
+                File tempFile = new File(modelsDir, MODEL_FILENAME + ".tmp");
 
                 try (InputStream in = body.byteStream();
                      FileOutputStream out = new FileOutputStream(tempFile)) {

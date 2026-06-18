@@ -12,12 +12,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Route based on whether model is already downloaded
-        if (ModelDownloader.isModelDownloaded(this)) {
-            startActivity(new Intent(this, ChatActivity.class));
-        } else {
-            startActivity(new Intent(this, FirstLaunchActivity.class));
-        }
+        // Always route to MainActivity (main menu)
+        // From there, user can start chat or download model if needed
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }
