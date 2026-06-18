@@ -15,11 +15,12 @@ package com.garu.app.llm;
 public class LlamaContext {
 
     static {
+    try {
         System.loadLibrary("llama");
+    } catch (UnsatisfiedLinkError e) {
+        android.util.Log.e("LlamaContext", "libllama.so missing - native AI disabled");
     }
-
-    private long contextPointer = 0;
-
+}
     // ── Native declarations ──────────────────────────────────────────────────
 
     /** Load a GGUF model from disk. Returns a native pointer (stored as long). */
