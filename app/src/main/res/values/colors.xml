@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme base -->
+    <color name="background">#0F0F0F</color>
+    <color name="surface">#1A1A1A</color>
+    <color name="divider">#2A2A2A</color>
+
+    <!-- Text -->
+    <color name="text_primary">#F0F0F0</color>
+    <color name="text_secondary">#888888</color>
+
+    <!-- Accent — clean white-blue -->
+    <color name="accent">#3B82F6</color>
+
+    <!-- Chat bubbles -->
+    <color name="bubble_user_bg">#3B82F6</color>
+    <color name="bubble_user_text">#FFFFFF</color>
+    <color name="bubble_garu_bg">#242424</color>
+
+    <!-- Input field -->
+    <color name="input_bg">#242424</color>
+    <color name="input_stroke">#333333</color>
+</resources>

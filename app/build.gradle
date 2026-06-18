@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.garu.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.garu.app"
+        minSdk 29           // Android 10
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters 'arm64-v8a'  // ARM64 only, per spec
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+        // Allow large .gguf model files if bundled
+        doNotStrip '**/*.so'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.7.0'
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // OkHttp for model download
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // llama.cpp Android bindings
+    // NOTE: The developer must compile llama.cpp as a shared library (.so)
+    // and place it in app/src/main/jniLibs/arm64-v8a/libllama.so
+    // See: https://github.com/ggerganov/llama.cpp/blob/master/examples/llama.android/
+    // The JNI bridge class LlamaContext is included in the source code below.
+}
