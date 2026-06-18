@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.garu.app.BuildConfig;
 import com.garu.app.R;
 import com.garu.app.llm.ModelDownloader;
 import com.garu.app.model.AppDatabase;
