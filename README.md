@@ -73,6 +73,9 @@ cp libllama.so /path/to/garu/app/src/main/jniLibs/arm64-v8a/libllama.so
 # Release APK (requires signing config in build.gradle)
 ./gradlew assembleRelease
 ```
+<img width="1080" height="2400" alt="1000014409" src="https://github.com/user-attachments/assets/640c6d61-06bf-4860-91e8-59c8cbd356f5" />
+<img width="1025" height="1253" alt="1000014416" src="https://github.com/user-attachments/assets/b8817085-473d-44f5-9f7a-734743af6f51" />
+<img width="1080" height="1098" alt="1000014420" src="https://github.com/user-attachments/assets/677a6f0c-8bdf-4900-83fd-a68cede833cf" />
 
 APK output: `app/build/outputs/apk/`
 
