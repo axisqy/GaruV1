@@ -93,4 +93,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("MODEL_PATH", modelFile.getAbsolutePath());
         startActivity(intent);
     }
+}
 
