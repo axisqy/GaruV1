@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void openChatActivity() {
         Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+        java.io.File modelFile = new java.io.File(getFilesDir(), "Phi-3-mini-4k-instruct-q4.gguf");
+        intent.putExtra("MODEL_PATH", modelFile.getAbsolutePath());
         startActivity(intent);
     }
-}
+
