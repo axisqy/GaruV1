@@ -4,7 +4,9 @@ Local Android AI assistant. Runs 100% on-device using Phi-3-mini Q4 via llama.cp
 
 
 
-# If you don't want to do all that just uhh go to Actions and download the latest apk from there and if you're on windows fuck you go use another local LLM
+# If you don't want to do all the stuff below uhh go to Actions and download the latest apk from there but it probably has like 381 bugs so do whatever you want idc I'll make new repos as i upgrade the app and if you're on windows fuck you go use another local LLM 
+
+## if you want to spend the next hour doing stuff that won't benefit you whatsoever and you want to compile an AI app for android using a computer that you could run an LLM on uhh read the stuff below and follow them 
 
 
 ---
