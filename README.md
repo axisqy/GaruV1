@@ -133,4 +133,4 @@ Per spec, these are hardcoded and not exposed to the user:
 - Android 10+ (API 29)
 - ARM64 processor
 - 8 GB RAM (6 GB minimum)
-- 6 GB free storage
+- 6 GB free storage (2.5 minimum but maybe more cuz of the unpacking and stuff idk lol)
