@@ -4,7 +4,7 @@ Local Android AI assistant. Runs 100% on-device using Phi-3-mini Q4 via llama.cp
 
 
 
-## If you don't want to do all the stuff below uhh go to Actions and download the latest apk from there if it has any bugs you can ask Garu to help you fix it ( ͡° ͜ʖ ͡°)
+## If you don't want to do all the stuff below go all the way down to Releases and download the latest APK from there if it has any bugs you can ask Garu to help you fix it ( ͡° ͜ʖ ͡°)
 
 ---
 
